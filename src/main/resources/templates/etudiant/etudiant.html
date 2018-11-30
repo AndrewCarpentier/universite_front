@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Etudiant</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body class="bg-dark">
+<!--nav-->
+    <div class="sticky-top"><header th:insert="utils.html"> </header></div>
+
+<!--Ajouter-->
+<div class="sticky-top" style="top:850px;position: fixed;"><a class="btn btn-dark" style="border: 1px white solid" th:href="@{/etudiant/add}" role="button"><i class="fa fa-user-plus">  Ajouter un etudiant</i></a></div>
+
+<!--tableau-->
+    <table class="table table-hover table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Numero Etudiant</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Prenom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Sexe</th>
+            <th scope="col" style="width: 120px"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="etudiant:${etudiants}">
+            <th scope="row" th:text="${etudiant.id}"></th>
+            <td th:text="${etudiant.numeroEtudiant}"></td>
+            <td th:text="${etudiant.nom}"></td>
+            <td th:text="${etudiant.prenom}"></td>
+            <td th:text="${#dates.format(etudiant.dateNaissance, 'dd MMMMM yyyy')}"></td>
+            <td th:text="${etudiant.sexe}"></td>
+            <td><a th:href="@{/etudiant/note(id=${etudiant.id})}" class="list-group-item list-group-item-action list-group-item-light" role="button"><i class="fa fa-plus">  Note</i></a></td>
+            <td><a th:href="@{/etudiant/modifier(id=${etudiant.id})}" class="list-group-item list-group-item-action list-group-item-light" role="button"><i class="fa fa-user-edit">  Modifier</i></a></td>
+            <td><a th:href="@{/etudiant/delete(id=${etudiant.id})}" class="list-group-item list-group-item-action list-group-item-light" role="button"><i class="fa fa-user-times">  Supprimer</i></a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

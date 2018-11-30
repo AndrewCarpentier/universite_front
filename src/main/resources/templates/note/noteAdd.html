@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une note</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+<!--nav-->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/note}"><i class="fa fa-plus">  NOTE</i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/note/add}"><i class="fa fa-plus-square">  AJOUTER UNE NOTE</i></a>
+        </li>
+    </ul>
+
+<!--formulaire-->
+    <div class="mx-auto w-25 p-3">
+        <form class="well form-horizontal" th:action="@{/note/add}" th:object="${note}" method="post">
+            <fieldset>
+                <div class="form-group">
+                    <label for="note" class="col-md-4 control-label">Note</label>
+                    <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-barcode"></i></span><input id="note" th:field="*{noteValue}" placeholder="Note" class="form-control" required="true" type="text"></div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="idEtudiant" class="col-md-4 control-label">Etudiant</label>
+                    <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-user-tie"></i></span>
+                            <select class="form-control" id="idEtudiant" name="idEtudiant">
+                                <option th:each="etudiant:${etudiants}" th:value="${etudiant.id}" th:text="${etudiant.nom} + ' ' + ${etudiant.prenom}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="idMatiere" class="col-md-4 control-label">Matiere</label>
+                    <div class="col-md-8 inputGroupContainer">
+                        <div class="input-group"><span class="input-group-addon"><i class="fa fa-object-group"></i></span>
+                            <select class="form-control" id="idMatiere" name="idMatiere">
+                                <option th:each="matiere:${matieres}" th:value="${matiere.id}" th:text="${matiere.nom}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn btn-secondary" type="submit">Submit</button>
+
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

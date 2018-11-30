@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Matiere</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body class="bg-dark">
+<!--nav-->
+    <div class="sticky-top"><header th:insert="utils.html"> </header></div>
+
+<!--Ajouter-->
+<div class="sticky-top" style="top:850px;position: fixed;"><a class="btn btn-dark"style=" border: 1px white solid" th:href="@{/matiere/add}" role="button"><i class="fa fa-user-plus">  Ajouter une matiere</i></a></div>
+
+<!--tableau-->
+    <table class="table table-hover table-dark">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Numero Matiere</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Coef</th>
+            <th scope="col">Enseignant</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="matieres:${matieres}">
+            <th scope="row" th:text="${matieres.id}"></th>
+            <td th:text="${matieres.numeroMatiere}"></td>
+            <td th:text="${matieres.nom}"></td>
+            <td th:text="${matieres.coef}"></td>
+            <td th:text="${matieres.enseignant.nom} + ' ' + ${matieres.enseignant.prenom}"></td>
+            <td><a th:href="@{/matiere/modifier(id=${matieres.id})}" class="list-group-item list-group-item-action list-group-item-light" role="button"><i class="fa fa-edit">  Modifier</i></a></td>
+            <td><a th:href="@{/matiere/delete(id=${matieres.id})}" class="list-group-item list-group-item-action list-group-item-light" role="button"><i class="fa fa-minus-square">  Supprimer</i></a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
